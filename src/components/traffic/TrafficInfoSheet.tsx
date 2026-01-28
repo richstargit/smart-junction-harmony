@@ -26,7 +26,7 @@ export function TrafficInfoSheet({ intersection, isOpen, onClose }: TrafficInfoS
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent side="bottom" className="h-[70vh] rounded-t-3xl">
+      <SheetContent side="bottom" className="h-[60vh] max-h-[500px] rounded-t-3xl">
         <SheetHeader className="pb-4">
           <div className="flex items-center justify-between">
             <SheetTitle className="flex items-center gap-2">
@@ -39,7 +39,7 @@ export function TrafficInfoSheet({ intersection, isOpen, onClose }: TrafficInfoS
           </div>
         </SheetHeader>
 
-        <div className="space-y-6 overflow-y-auto">
+        <div className="space-y-6 overflow-y-auto max-h-[calc(60vh-100px)] pb-6">
           {/* AI Analysis */}
           <div className="bg-status-ai/10 p-4 rounded-xl border border-status-ai/30">
             <div className="flex items-center gap-2 mb-3">
@@ -47,9 +47,9 @@ export function TrafficInfoSheet({ intersection, isOpen, onClose }: TrafficInfoS
               <span className="font-semibold">การวิเคราะห์จาก AI</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              ขณะนี้มีรถ <strong>{intersection.totalVehicles} คัน</strong> ในบริเวณสี่แยก 
+              ขณะนี้มีรถ <strong>{intersection.totalVehicles} คัน</strong> ในบริเวณสี่แยก
               คาดว่าจะใช้เวลารอประมาณ <strong>{intersection.estimatedWaitMinutes} นาที</strong>
-              {intersection.estimatedWaitMinutes > 4 && 
+              {intersection.estimatedWaitMinutes > 4 &&
                 ' แนะนำให้ใช้เส้นทางอื่นหากเป็นไปได้'}
             </p>
           </div>

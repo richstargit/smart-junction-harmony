@@ -16,11 +16,11 @@ declare global {
   }
 }
 
-export function GoogleMapView({ 
-  intersections, 
-  selectedId, 
+export function GoogleMapView({
+  intersections,
+  selectedId,
   onSelectIntersection,
-  apiKey 
+  apiKey
 }: GoogleMapViewProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<google.maps.Map | null>(null);
@@ -90,7 +90,7 @@ export function GoogleMapView({
     // Create new markers
     intersections.forEach(intersection => {
       const markerColor = getMarkerColor(intersection.estimatedWaitMinutes);
-      
+
       const marker = new google.maps.Marker({
         position: intersection.location,
         map: mapInstanceRef.current,
@@ -153,13 +153,13 @@ export function GoogleMapView({
   }
 
   return (
-    <div className="relative w-full h-full rounded-lg overflow-hidden">
+    <div className="absolute inset-0">
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-muted z-10">
           <Loader2 className="w-8 h-8 animate-spin text-primary" />
         </div>
       )}
-      <div ref={mapRef} className="w-full h-full" />
+      <div ref={mapRef} className="absolute inset-0" />
     </div>
   );
 }

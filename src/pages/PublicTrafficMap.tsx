@@ -7,11 +7,11 @@ import { TrafficStatisticsChart } from '@/components/traffic/TrafficStatisticsCh
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { 
-  TrafficCone, 
-  Search, 
-  MapPin, 
-  Navigation, 
+import {
+  TrafficCone,
+  Search,
+  MapPin,
+  Navigation,
   RefreshCw,
   Menu,
   X,
@@ -30,8 +30,8 @@ export default function PublicTrafficMap() {
   const [useGoogleMaps, setUseGoogleMaps] = useState(!!GOOGLE_MAPS_API_KEY);
 
   const selectedIntersection = intersections.find(i => i.id === selectedId) || null;
-  
-  const filteredIntersections = intersections.filter(i => 
+
+  const filteredIntersections = intersections.filter(i =>
     i.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -50,7 +50,7 @@ export default function PublicTrafficMap() {
             <TrafficCone className="w-6 h-6 text-primary" />
             <span className="font-bold">Traffic Live</span>
           </div>
-          
+
           <div className="flex-1 max-w-xs">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -62,9 +62,9 @@ export default function PublicTrafficMap() {
               />
             </div>
           </div>
-          
-          <Button 
-            variant="ghost" 
+
+          <Button
+            variant="ghost"
             size="icon"
             onClick={() => setShowMenu(!showMenu)}
           >
@@ -84,8 +84,8 @@ export default function PublicTrafficMap() {
               ใช้ตำแหน่งปัจจุบัน
             </Button>
             {GOOGLE_MAPS_API_KEY && (
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="w-full justify-start"
                 onClick={() => setUseGoogleMaps(!useGoogleMaps)}
               >
@@ -100,8 +100,8 @@ export default function PublicTrafficMap() {
       {/* View toggle */}
       <div className="bg-card border-b px-4 py-2">
         <div className="flex gap-2">
-          <Button 
-            variant={viewMode === 'map' ? 'default' : 'outline'} 
+          <Button
+            variant={viewMode === 'map' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setViewMode('map')}
             className="flex-1"
@@ -109,8 +109,8 @@ export default function PublicTrafficMap() {
             <Map className="w-4 h-4 mr-2" />
             แผนที่
           </Button>
-          <Button 
-            variant={viewMode === 'stats' ? 'default' : 'outline'} 
+          <Button
+            variant={viewMode === 'stats' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setViewMode('stats')}
             className="flex-1"
@@ -126,7 +126,7 @@ export default function PublicTrafficMap() {
         {viewMode === 'stats' ? (
           <div className="p-4 space-y-4 overflow-auto h-full">
             <TrafficStatisticsChart />
-            
+
             {/* Intersection list for stats */}
             <div className="space-y-3">
               <h3 className="font-semibold">เลือกแยกเพื่อดูสถิติ</h3>
@@ -171,7 +171,7 @@ export default function PublicTrafficMap() {
             <div className="relative h-full p-4">
               <div className="grid grid-cols-2 gap-8 place-items-center h-full py-8">
                 {filteredIntersections.map((intersection, index) => (
-                  <div 
+                  <div
                     key={intersection.id}
                     className="transform"
                     style={{
@@ -230,12 +230,14 @@ export default function PublicTrafficMap() {
         )}
       </main>
 
-      {/* Bottom hint */}
-      <div className="bg-card border-t px-4 py-3 text-center safe-area-bottom">
-        <p className="text-sm text-muted-foreground">
-          กดที่หมุดเพื่อดูรายละเอียดการจราจร
-        </p>
-      </div>
+      {/* Bottom hint - hide when sheet is open */}
+      {!selectedId && (
+        <div className="bg-card border-t px-4 py-3 text-center safe-area-bottom">
+          <p className="text-sm text-muted-foreground">
+            กดที่หมุดเพื่อดูรายละเอียดการจราจร
+          </p>
+        </div>
+      )}
 
       {/* Traffic info sheet */}
       <TrafficInfoSheet
