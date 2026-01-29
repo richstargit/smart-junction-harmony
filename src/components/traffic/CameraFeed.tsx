@@ -20,7 +20,7 @@ interface CameraFeedProps {
 }
 
 export function CameraFeed({ direction, vehicleCount, isActive }: CameraFeedProps) {
-  const [detectedVehicles, setDetectedVehicles] = useState<DetectedVehicle[]>([]);
+  const [detectedVehicles, _] = useState<DetectedVehicle[]>([]);
 
   // Simulate AI detection with bounding boxes
   // useEffect(() => {
