@@ -4,6 +4,7 @@ import { IntersectionControl } from '@/components/traffic/IntersectionControl';
 import { CameraFeed } from '@/components/traffic/CameraFeed';
 import { ModeSelector } from '@/components/traffic/ModeSelector';
 import { TrafficStatisticsChart } from '@/components/traffic/TrafficStatisticsChart';
+import { AINotificationLog } from '@/components/traffic/AINotificationLog';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -230,6 +231,9 @@ export default function OfficerDashboard() {
                 </p>
               </Card>
             )}
+
+            {/* AI Notification Log */}
+            <AINotificationLog />
 
             {/* Traffic Statistics Chart */}
             <TrafficStatisticsChart intersectionName={intersection.name} />
