@@ -7,8 +7,8 @@ import { TrafficStatisticsChart } from '@/components/traffic/TrafficStatisticsCh
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import AppLogo from '@/components/AppLogo';
 import {
-  TrafficCone,
   Search,
   MapPin,
   Navigation,
@@ -46,10 +46,7 @@ export default function PublicTrafficMap() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-card border-b px-4 py-3 safe-area-top">
         <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <TrafficCone className="w-6 h-6 text-primary" />
-            <span className="font-bold">Traffic Live</span>
-          </div>
+          <AppLogo size="sm" clickable />
 
           <div className="flex-1 max-w-xs">
             <div className="relative">

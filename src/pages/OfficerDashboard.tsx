@@ -1,29 +1,27 @@
-import { useSearchParams } from 'react-router-dom';
-import { useTrafficData } from '@/hooks/useTrafficData';
-import { IntersectionControl } from '@/components/traffic/IntersectionControl';
+import AppLogo from '@/components/AppLogo';
+import { AINotificationLog } from '@/components/traffic/AINotificationLog';
 import { CameraFeed } from '@/components/traffic/CameraFeed';
+import { IntersectionControl } from '@/components/traffic/IntersectionControl';
 import { ModeSelector } from '@/components/traffic/ModeSelector';
 import { TrafficStatisticsChart } from '@/components/traffic/TrafficStatisticsChart';
-import { AINotificationLog } from '@/components/traffic/AINotificationLog';
-import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  TrafficCone, 
-  LogOut, 
-  Wifi, 
-  WifiOff, 
-  Car, 
-  Clock, 
-  Settings,
-  LayoutGrid,
-  Maximize2,
-  BarChart3
-} from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useTrafficData } from '@/hooks/useTrafficData';
 import { TrafficDirection } from '@/types/traffic';
+import {
+  Car,
+  Clock,
+  LayoutGrid,
+  LogOut,
+  Maximize2,
+  Settings,
+  Wifi,
+  WifiOff
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 export default function OfficerDashboard() {
   const [searchParams] = useSearchParams();
@@ -31,12 +29,12 @@ export default function OfficerDashboard() {
   const [activeCam, setActiveCam] = useState<TrafficDirection>('north');
   const [showAllCams, setShowAllCams] = useState(false);
 
-  const { 
-    intersections, 
-    changeLight, 
-    changeMode, 
+  const {
+    intersections,
+    changeLight,
+    changeMode,
     getAIRecommendation,
-    setSelectedId 
+    setSelectedId
   } = useTrafficData();
 
   useEffect(() => {
@@ -61,10 +59,7 @@ export default function OfficerDashboard() {
       <header className="sticky top-0 z-50 border-b bg-card/95 backdrop-blur">
         <div className="container flex items-center justify-between h-16 px-4">
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <TrafficCone className="w-6 h-6 text-primary" />
-              <span className="font-bold text-lg">AI Traffic Control</span>
-            </div>
+            <AppLogo size="sm" clickable />
             <Separator orientation="vertical" className="h-6" />
             <div className="flex items-center gap-2">
               <Badge variant={intersection.status === 'online' ? 'default' : 'destructive'}>
@@ -77,7 +72,7 @@ export default function OfficerDashboard() {
               <span className="font-medium">{intersection.name}</span>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-4">
             <div className="hidden sm:flex items-center gap-4 text-sm">
               <div className="flex items-center gap-1">
@@ -110,8 +105,8 @@ export default function OfficerDashboard() {
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-semibold">กล้องวงจรปิด</h2>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="sm"
                 onClick={() => setShowAllCams(!showAllCams)}
               >
@@ -122,7 +117,7 @@ export default function OfficerDashboard() {
                 )}
               </Button>
             </div>
-            
+
             {showAllCams ? (
               <div className="grid grid-cols-2 gap-4">
                 {(['north', 'south', 'east', 'west'] as TrafficDirection[]).map((dir) => (
@@ -190,11 +185,10 @@ export default function OfficerDashboard() {
                 {Object.entries(intersection.lanes).map(([dir, lane]) => (
                   <div key={dir} className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <div className={`w-3 h-3 rounded-full ${
-                        lane.state === 'green' ? 'bg-traffic-green' :
+                      <div className={`w-3 h-3 rounded-full ${lane.state === 'green' ? 'bg-traffic-green' :
                         lane.state === 'yellow' ? 'bg-traffic-yellow' :
-                        'bg-traffic-red'
-                      }`} />
+                          'bg-traffic-red'
+                        }`} />
                       <span className="text-sm capitalize">
                         {dir === 'north' && 'เหนือ'}
                         {dir === 'south' && 'ใต้'}

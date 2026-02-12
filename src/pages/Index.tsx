@@ -1,8 +1,9 @@
-import { useNavigate } from 'react-router-dom';
+import intersectionHero from '@/assets/intersection-hero.jpg';
+import AppLogo, { APP_NAME } from '@/components/AppLogo';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { TrafficCone, Shield, MapPin, ArrowRight, Bot, Car, Clock } from 'lucide-react';
-import intersectionHero from '@/assets/intersection-hero.jpg';
+import { ArrowRight, Bot, Car, Clock, MapPin, Shield } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Index() {
   const navigate = useNavigate();
@@ -11,28 +12,25 @@ export default function Index() {
     <div className="min-h-screen bg-background">
       {/* Hero section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <img 
-          src={intersectionHero} 
-          alt="Traffic intersection" 
+        <img
+          src={intersectionHero}
+          alt="Traffic intersection"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
-        
+
         <div className="relative z-10 container px-4 text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="p-4 bg-primary rounded-2xl shadow-lg">
-              <TrafficCone className="w-10 h-10 text-primary-foreground" />
-            </div>
+            <AppLogo size="lg" />
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            AI Traffic Control
+            {APP_NAME}
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            ระบบควบคุมไฟจราจรอัจฉริยะ ด้วยเทคโนโลยี AI 
-            สำหรับการจราจรที่คล่องตัวและปลอดภัย
+            จราจรที่ดี ทำให้คุณรักทุกการเดินทาง
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" onClick={() => navigate('/login')} className="text-lg px-8">
               <Shield className="w-5 h-5 mr-2" />
@@ -54,7 +52,7 @@ export default function Index() {
           <h2 className="text-3xl font-bold text-center mb-12">
             ฟีเจอร์หลัก
           </h2>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="p-6 text-center">
               <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
@@ -66,7 +64,7 @@ export default function Index() {
                 ด้วยเทคโนโลยี Computer Vision
               </p>
             </Card>
-            
+
             <Card className="p-6 text-center">
               <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                 <Car className="w-7 h-7 text-primary" />
@@ -77,7 +75,7 @@ export default function Index() {
                 ตามความหนาแน่นของการจราจร
               </p>
             </Card>
-            
+
             <Card className="p-6 text-center">
               <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                 <Clock className="w-7 h-7 text-primary" />
@@ -95,7 +93,7 @@ export default function Index() {
       {/* Footer */}
       <footer className="py-8 border-t">
         <div className="container px-4 text-center text-muted-foreground">
-          <p>© 2026 AI Traffic Control System</p>
+          <p>© 2026 {APP_NAME}</p>
         </div>
       </footer>
     </div>

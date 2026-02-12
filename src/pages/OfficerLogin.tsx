@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Card } from '@/components/ui/card';
+import intersectionHero from '@/assets/intersection-hero.jpg';
+import AppLogo from '@/components/AppLogo';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
+import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { TrafficCone, MapPin, Shield, ArrowRight } from 'lucide-react';
-import intersectionHero from '@/assets/intersection-hero.jpg';
+import { ArrowRight, MapPin, Shield } from 'lucide-react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const INTERSECTIONS = [
   { id: 'int-001', name: 'แยกอโศก' },
@@ -25,7 +26,7 @@ export default function OfficerLogin() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!officerId || !selectedIntersection) {
       toast({
         title: 'กรุณากรอกข้อมูลให้ครบ',
@@ -36,15 +37,15 @@ export default function OfficerLogin() {
     }
 
     setIsLoading(true);
-    
+
     // Simulate login
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     toast({
       title: 'เข้าสู่ระบบสำเร็จ',
       description: `ยินดีต้อนรับ เจ้าหน้าที่ ${officerId}`
     });
-    
+
     navigate(`/dashboard?intersection=${selectedIntersection}`);
   };
 
@@ -52,29 +53,21 @@ export default function OfficerLogin() {
     <div className="min-h-screen flex">
       {/* Left side - Hero image */}
       <div className="hidden lg:flex lg:w-1/2 relative">
-        <img 
-          src={intersectionHero} 
-          alt="Traffic intersection" 
+        <img
+          src={intersectionHero}
+          alt="Traffic intersection"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 to-foreground/40" />
         <div className="relative z-10 p-12 flex flex-col justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-primary rounded-xl">
-              <TrafficCone className="w-8 h-8 text-primary-foreground" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-background">AI Traffic Control</h1>
-              <p className="text-background/70">ระบบควบคุมจราจรอัจฉริยะ</p>
-            </div>
-          </div>
-          
+          <AppLogo size="lg" showSubtitle variant="light" />
+
           <div className="text-background">
             <h2 className="text-4xl font-bold mb-4">
               ควบคุมจราจรอย่างชาญฉลาด<br />ด้วยพลัง AI
             </h2>
             <p className="text-background/80 text-lg max-w-md">
-              ระบบตรวจจับรถยนต์อัตโนมัติ คำนวณเวลาไฟจราจรที่เหมาะสม 
+              ระบบตรวจจับรถยนต์อัตโนมัติ คำนวณเวลาไฟจราจรที่เหมาะสม
               ลดความแออัดและเพิ่มประสิทธิภาพการจราจร
             </p>
           </div>
@@ -84,14 +77,8 @@ export default function OfficerLogin() {
       {/* Right side - Login form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-background">
         <Card className="w-full max-w-md p-8">
-          <div className="lg:hidden flex items-center gap-3 mb-8">
-            <div className="p-3 bg-primary rounded-xl">
-              <TrafficCone className="w-6 h-6 text-primary-foreground" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold">AI Traffic Control</h1>
-              <p className="text-sm text-muted-foreground">ระบบควบคุมจราจรอัจฉริยะ</p>
-            </div>
+          <div className="lg:hidden mb-8">
+            <AppLogo size="sm" showSubtitle />
           </div>
 
           <div className="mb-6">

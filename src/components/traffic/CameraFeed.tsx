@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { TrafficDirection, DIRECTION_LABELS } from '@/types/traffic';
-import { Video, Car, Sparkles, Eye, EyeOff } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { DIRECTION_LABELS, TrafficDirection } from '@/types/traffic';
+import { Car, Eye, EyeOff, Sparkles, Video } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 interface DetectedVehicle {
   id: string;
@@ -51,18 +51,44 @@ export function CameraFeed({ direction, vehicleCount, isActive }: CameraFeedProp
     return () => clearInterval(interval);
   }, [vehicleCount]);
 
+  // รูปพื้นหลัง CCTV จำลองแต่ละทิศ (จาก Unsplash - traffic/road images)
+  const cctvBackgrounds: Record<TrafficDirection, string> = {
+    north: 'https://images.unsplash.com/photo-1542744173-05336fcc7ad4?w=800&q=80&auto=format',
+    south: 'https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=800&q=80&auto=format',
+    east: 'https://images.unsplash.com/photo-1494783367193-149034c05e8f?w=800&q=80&auto=format',
+    west: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80&auto=format',
+  };
+
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
   return (
     <Card className="overflow-hidden">
-      <div className="relative aspect-video bg-foreground/5">
-        {/* Camera feed video */}
-        <video
-          src="/traffic_1.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-90"
+      <div className="relative aspect-video bg-neutral-900">
+        {/* Background CCTV image (always visible as fallback) */}
+        <img
+          src={cctvBackgrounds[direction]}
+          alt={`CCTV ${DIRECTION_LABELS[direction]}`}
+          className="absolute inset-0 w-full h-full object-cover"
         />
+
+        {/* Camera feed video (layered on top if loaded) */}
+        {!videoError && (
+          <video
+            src="/traffic_1.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster={cctvBackgrounds[direction]}
+            onLoadedData={() => setVideoLoaded(true)}
+            onError={() => setVideoError(true)}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${videoLoaded ? 'opacity-90' : 'opacity-0'}`}
+          />
+        )}
+
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/20" />
 
         {/* AI Detection overlay */}
         {showBoundingBoxes && (
