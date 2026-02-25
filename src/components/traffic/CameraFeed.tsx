@@ -53,10 +53,10 @@ export function CameraFeed({ direction, vehicleCount, isActive }: CameraFeedProp
 
   // รูปพื้นหลัง CCTV จำลองแต่ละทิศ (จาก Unsplash - traffic/road images)
   const cctvBackgrounds: Record<TrafficDirection, string> = {
-    north: 'https://images.unsplash.com/photo-1542744173-05336fcc7ad4?w=800&q=80&auto=format',
-    south: 'https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=800&q=80&auto=format',
-    east: 'https://images.unsplash.com/photo-1494783367193-149034c05e8f?w=800&q=80&auto=format',
-    west: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80&auto=format',
+    north: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2I76FnJ_4gX5AxsxGmnQ3GSP2G2ei-4Lmsw&s',
+    south: 'https://today-obs.line-scdn.net/0hc_9X3N1PPHAEIRYi72NDJzx3Px83TS9zYBdtc1hPYkR7E39yP0d3QSYoZEMsFnsuak90E2QgakYqEC4nPA/w1200',
+    east: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsC3ggUjx60VKPCv_YKUKOs3b3FEp6lsNi4g&s',
+    west: 'https://www.autoinfo.co.th/uploads/2021/09/8.1-TOP-10.jpg',
   };
 
   const [videoLoaded, setVideoLoaded] = useState(false);
